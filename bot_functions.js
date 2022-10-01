@@ -77,7 +77,7 @@ function timeLeft() {
 }
 
 function notePreparing(msg, match) {
-    clrTimeout(timerId);
+    clrTimeout(timerId)
 
     let userId = msg.from.id;
     let work = match[1];
