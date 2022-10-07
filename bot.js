@@ -5,7 +5,6 @@ const messages = require('./messages');
 const TgBot = require('node-telegram-bot-api');
 
 const token = process.env.BOT_TOKEN;
-
 const bot = new TgBot(token, {
     polling: true
 });
@@ -23,7 +22,8 @@ bot.on('message', msg => {
             bot.sendMessage(userId, ('Hello, ' + msg.from.first_name + '!\n' + messages.botMessages('firstStart')), {
                 reply_markup: {
                     resize_keyboard: true,
-                    keyboard:useKeyboard.startKeyboard
+                    keyboard:useKeyboard.startKeyboard,
+                    inline_keyboard: [[{text: 'Rate bot here', url: 'https://github.com/Gmust/pomodoro-js-bot'}]]
                 }
             });
             break;
@@ -32,7 +32,7 @@ bot.on('message', msg => {
             bot.sendMessage(userId, messages.botMessages('startBtn'), {
                 reply_markup: {
                     resize_keyboard: true,
-                    keyboard: useKeyboard.intervalsKeyboard
+                    keyboard: useKeyboard.intervalsKeyboard,
                 }
             });
             break;
@@ -66,8 +66,13 @@ bot.on('message', msg => {
             })
             break;
         case '/help':
-            messages.botSendMyMessage('helpBtn');
-            break;
+            bot.sendMessage(userId, messages.botMessages('helpBtn'), {
+                reply_markup: {
+                    resize_keyboard: true,
+                    inline_keyboard: [[{text: 'Rate bot here', url: 'https://github.com/Gmust/pomodoro-js-bot'}]]
+                }
+            });
+            break
         default:
             break;
     }
